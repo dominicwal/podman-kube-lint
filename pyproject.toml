@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "podman-kube-lint"
+version = "0.1.0"
+description = "Lint Kubernetes YAML manifests for Podman kube play compatibility"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = ["PyYAML>=6.0,<7"]
+keywords = ["podman", "kubernetes", "yaml", "linter", "containers"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Quality Assurance",
+]
+
+[project.scripts]
+podman-kube-lint = "podman_kube_lint:main"
+
+[tool.setuptools]
+py-modules = ["podman_kube_lint"]
