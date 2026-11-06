@@ -2,7 +2,7 @@
 
 Notable changes to this project are documented here.
 
-## 1.0.0 - Unreleased
+## 1.0.0 - 2026-11-06
 
 - Split the linter into focused Python modules.
 - Added opt-in YAML configuration for scan paths, exclusions, skipped
