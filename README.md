@@ -89,6 +89,15 @@ podman-kube-lint --format json --snippet
 
 Run `podman-kube-lint --help` for all options.
 
+Check the installed tool version:
+
+```console
+podman-kube-lint --version
+```
+
+This is the tool's version, not the Podman documentation version used by its
+checks.
+
 ## Configuration
 
 Use the optional [example configuration](examples/podman-kube-lint.yaml) as a

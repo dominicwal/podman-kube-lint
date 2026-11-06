@@ -6,6 +6,7 @@ import unittest
 from pathlib import Path
 
 from podman_kube_lint import main
+from podman_kube_lint._version import __version__
 
 
 VALID_POD = """\
@@ -41,6 +42,15 @@ class CliTests(unittest.TestCase):
         with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
             exit_code = main([str(self.manifest), *args])
         return exit_code, stdout.getvalue(), stderr.getvalue()
+
+    def test_version_exits_without_scanning_or_loading_config(self):
+        stdout, stderr = io.StringIO(), io.StringIO()
+        with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
+            with self.assertRaises(SystemExit) as result:
+                main(["--version", "--config", "missing.yaml"])
+        self.assertEqual(result.exception.code, 0)
+        self.assertEqual(stdout.getvalue(), f"podman-kube-lint {__version__}\n")
+        self.assertEqual(stderr.getvalue(), "")
 
     def test_valid_manifest_succeeds(self):
         self.manifest.write_text(VALID_POD, encoding="utf-8")

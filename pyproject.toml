@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "podman-kube-lint"
-version = "1.0.0"
+dynamic = ["version"]
 description = "Lint Kubernetes YAML manifests for Podman kube play compatibility"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -30,3 +30,6 @@ podman-kube-lint = "podman_kube_lint:main"
 
 [tool.setuptools.packages.find]
 include = ["podman_kube_lint*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "podman_kube_lint._version.__version__"}

@@ -7,6 +7,7 @@ import sys
 from dataclasses import asdict
 from pathlib import Path
 
+from ._version import __version__
 from .config import Config, ConfigError, load_config
 from .findings import Finding
 from .report import Col, render_text
@@ -16,6 +17,8 @@ from .yaml_loader import LDict
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=f"Lint Podman kube play manifests (YAML / YAML.J2) against the podman kube play {DOC_VERSION} documentation.")
+    ap.add_argument("--version", action="version", version=f"podman-kube-lint {__version__}",
+                    help="Show the installed tool version and exit")
     ap.add_argument("paths", nargs="*", help="Files or directories to scan (default: current directory)")
     ap.add_argument("--config", metavar="FILE", help="Load scan settings from a YAML configuration file")
     ap.add_argument("-x", "--exclude", action="append", metavar="GLOB",
