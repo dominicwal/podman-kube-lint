@@ -2,8 +2,11 @@
 
 Notable changes to this project are documented here.
 
-## 0.1.0 - Unreleased
+## 1.0.0 - Unreleased
 
+- Split the linter into focused Python modules.
+- Added opt-in YAML configuration for scan paths, exclusions, skipped
+  directories, output format, and failure threshold.
 - Initial public release preparation.
 - Added installable `podman-kube-lint` command.
 - Omitted source-line snippets from reports by default; `--snippet` opts in.

@@ -1,0 +1,21 @@
+# Paths are relative to the directory where you run the command.
+paths:
+  - .
+
+# These patterns match paths relative to each scan root or individual names.
+exclude:
+  - "vendor/*"
+  - "generated.yaml"
+
+# Additional directory names to skip anywhere below a scan root.
+skip_dirs:
+  - generated
+
+# Valid values: error, warning, never.
+fail_on: error
+
+# Also report unsupported Kubernetes kinds.
+all_kinds: false
+
+# Valid values: text, json.
+format: text

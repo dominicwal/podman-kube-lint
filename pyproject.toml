@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "podman-kube-lint"
-version = "0.1.0"
+version = "1.0.0"
 description = "Lint Kubernetes YAML manifests for Podman kube play compatibility"
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -28,5 +28,5 @@ classifiers = [
 [project.scripts]
 podman-kube-lint = "podman_kube_lint:main"
 
-[tool.setuptools]
-py-modules = ["podman_kube_lint"]
+[tool.setuptools.packages.find]
+include = ["podman_kube_lint*"]

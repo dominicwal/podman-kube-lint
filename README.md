@@ -11,9 +11,8 @@ Podman version you deploy.
 
 ## Features
 
-- Recursively scans `.yaml` and `.yml` files and supported YAML Jinja template
-  extensions (`.yaml.j2`, `.yml.j2`, `.yaml.jinja`, `.yml.jinja`, `.jinja`, and
-  `.jinja2`).
+- Recursively scans `.yaml` and `.yml` files, including YAML Jinja templates
+  such as `.yaml.j2`, `.yml.j2`, `.yaml.jinja`, and `.yaml.jinja2`.
 - Recognizes Pod, Deployment, DaemonSet, Job, PersistentVolumeClaim, ConfigMap,
   and Secret resources.
 - Checks YAML syntax, duplicate keys, required fields, types, enums, references,
@@ -90,6 +89,32 @@ podman-kube-lint --format json --snippet
 
 Run `podman-kube-lint --help` for all options.
 
+## Configuration
+
+Use the optional [example configuration](examples/podman-kube-lint.yaml) as a
+starting point. Configuration is loaded only when explicitly requested:
+
+```console
+podman-kube-lint --config path/to/podman-kube-lint.yaml
+```
+
+The file is a YAML mapping. All settings are optional:
+
+| Key | Default | Description |
+| --- | --- | --- |
+| `paths` | `["."]` | Files or directories to scan; relative paths are resolved from the current working directory. |
+| `exclude` | `[]` | Glob patterns matched against paths relative to each scan root, filenames, or directory-name components. |
+| `skip_dirs` | `[]` | Additional directory names to skip anywhere below a scan root. Built-in skipped directories remain enabled. |
+| `fail_on` | `error` | Exit threshold: `error`, `warning`, or `never`. |
+| `all_kinds` | `false` | Also report unsupported Kubernetes kinds. |
+| `format` | `text` | Report format: `text` or `json`. |
+
+Explicit positional paths, `--exclude`, `--fail-on`, `--format`, `--all-kinds`,
+and `--no-all-kinds` override the corresponding settings in the file. Repeated
+`--exclude` options replace, rather than extend, the file's exclude list.
+`skip_dirs` extends the built-in skip list; it is not controlled by the CLI.
+Invalid or unreadable configuration files cause exit code `2`.
+
 ## Publish a release
 
 The GitHub Actions workflow publishes a distribution to PyPI when a GitHub
@@ -146,6 +171,9 @@ podman-kube-lint --help
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines and
 [SECURITY.md](SECURITY.md) for vulnerability reporting.
+
+The Python package separates CLI and configuration handling, file discovery,
+YAML parsing, validation rules, findings, and report rendering into modules.
 
 ## License
 
